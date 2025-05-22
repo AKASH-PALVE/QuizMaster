@@ -6,8 +6,8 @@ import jakarta.persistence.Id;
 
 public class QuestionWrapper {
 
-    @Id // To tell it is a primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // genearteing the values automatically
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String questionTitle;
     private String option1;

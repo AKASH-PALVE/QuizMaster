@@ -62,7 +62,7 @@ public class QuestionService {
 
         try{
             questionDao.delete(question);
-            return new ResponseEntity<String>("success",HttpStatus.GONE);
+            return new ResponseEntity<String>("success",HttpStatus.OK);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -86,4 +86,15 @@ public class QuestionService {
     }
 
 
+    public ResponseEntity<List<Question>> getQuestionsByDifficulty(String difficulty) {
+
+        try {
+            return new ResponseEntity<>(questionDao.findByDifficultyLevel(difficulty),HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
+    }
 }

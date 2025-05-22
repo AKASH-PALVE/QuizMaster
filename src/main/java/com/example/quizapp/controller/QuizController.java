@@ -19,30 +19,29 @@ public class QuizController {
     QuizService quizService;
 
 
-
+    // -- CREATE THE QUIZ
     @PostMapping("/create")
     public ResponseEntity<String> createQuiz(@RequestParam String category,@RequestParam Integer numQ,@RequestParam String title){
-        // return new ResponseEntity<>("quiz create",HttpStatus.OK);
-        // we need to return the quiz !
-        // return quizService;
-
         return quizService.createQuiz(category,numQ,title);
-
     }
 
+
+    // -- GET QUIZ BY ID
     @GetMapping("/get/{id}")
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable Integer id){
-
-        // For QuestionWrapper type , Return type : List<QuestionWrappper>
          return quizService.getQuizQuestions(id);
-
-        // For Question type , Return type : List<Question>
-//        return quizService.getQuiz(id);
     }
 
+    // -- CALCULATE SCORE BY SUBMITTING QUIZ
     @PostMapping("/submit/{id}")
     public ResponseEntity<Integer> submitQuiz(@PathVariable Integer id, @RequestBody List<Response> responses){
         return quizService.calculateResult(id,responses);
+    }
+
+    // -- GET THE PERFORMANCE ANALYSIS WITH GEMINI API
+    @PostMapping("/submit/analysis/{id}")
+    public ResponseEntity<String> analyseQuiz(@PathVariable Integer id, @RequestBody List<Response> responses){
+        return quizService.analyseQuiz(id,responses);
     }
 
 }

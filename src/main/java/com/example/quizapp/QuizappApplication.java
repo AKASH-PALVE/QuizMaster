@@ -12,5 +12,9 @@ public class QuizappApplication {
 		SpringApplication.run(QuizappApplication.class, args);
 	}
 
+	@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
+	}
 
 }

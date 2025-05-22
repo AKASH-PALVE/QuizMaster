@@ -6,33 +6,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GeminiResponse {
-    private ArrayList<Candidate> candidates;
+public class GeminiRequest {
 
-    @Setter
-    @Getter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class Candidate{
-        private Content content;
-    }
+    private ArrayList<Content> contents;
 
-    @Setter
     @Getter
+    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Content{
         private ArrayList<Part> parts;
     }
 
-    @Setter
     @Getter
+    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Part{

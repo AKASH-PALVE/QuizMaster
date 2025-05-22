@@ -25,6 +25,9 @@ public class QuizService {
     @Autowired
     QuizDao quizDao;
 
+    @Autowired
+    GeminiService geminiService;
+
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
 
         List<Question> questions = questionDao.findRandomQuestionsByCategory(category,numQ);
@@ -47,11 +50,10 @@ public class QuizService {
     }
 
 
-    // To be fixed  ! , Returns only quiz !
+
     public ResponseEntity<List<Question>> getQuiz(Integer id) {
 
         try {
-//            List<Question> quizQuestions = questionDao.getQuestionsById(id);
             Optional<Quiz> quizQuestions = quizDao.findById(id);
             List<Question> listQuestions = quizQuestions.get().getQuestions();
 
@@ -91,8 +93,6 @@ public class QuizService {
     public ResponseEntity<Integer> calculateResult(Integer id, List<Response> responses) {
 
         Quiz quiz = quizDao.findById(id).get();
-        // quizDao.findById(id): This searches for a Quiz in the database by its id. It returns an Optional<Quiz>.
-        //.get(): This extracts the actual Quiz object from the Optional.
 
         List<Question> questions = quiz.getQuestions();
 
@@ -108,5 +108,16 @@ public class QuizService {
 
         return new ResponseEntity<>(right,HttpStatus.OK);
 
+    }
+
+    public List<Question> getQuizQuestionsFromDB(Integer id){
+        Optional<Quiz> quiz = quizDao.findById(id);
+        List<Question> questionList = quiz.get().getQuestions();
+
+        return questionList;
+    }
+
+    public ResponseEntity<String> analyseQuiz(Integer id, List<Response> responses) {
+        return geminiService.analyseQuiz(id,responses);
     }
 }

@@ -9,10 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-//@Data // provided by lombok , without it we need to add  getters and setters for each member ,
-//@Getter
-//@Setter
-@Entity // To map the table with the class , if the class and table name is diff , use (@Table)
+
+@Entity
 public class Question {
 
     @Id // To tell it is a primary key
